@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Orthopaedic Consultation in Bengaluru | OrthoNow</title>
+<meta name="description" content="Get an expert orthopaedic opinion for knee or back pain. Book your consultation at OrthoNow, Bengaluru's trusted orthopaedic clinic network.">
+
+<!--
+  PERFORMANCE NOTE:
+  No external fonts, no external images, no external JS libraries are loaded.
+  Everything (CSS, JS, and the one decorative graphic) lives in this single file.
+  This is deliberate: every extra network request is what tanks mobile PageSpeed
+  scores (render-blocking fonts, large hero images, etc). System font stack is
+  used instead of a webfont so text paints immediately (no FOUT/FOIT, no layout shift).
+-->
+
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --color-bg: #F6F3ED;           /* warm clinical off-white, not sterile hospital white */
+    --color-surface: #FFFFFF;
+    --color-ink: #1E2A28;          /* deep charcoal-teal for text, easier on eyes than pure black */
+    --color-ink-soft: #52605D;
+    --color-primary: #14524A;      /* deep teal - trust, medical, calm */
+    --color-primary-soft: #E7EFEC;
+    --color-accent: #E8843B;       /* warm amber-orange - CTA, distinct from generic terracotta */
+    --color-accent-dark: #C96C28;
+    --color-border: #DDD6C7;
+    --radius: 14px;
+    --shadow: 0 8px 24px rgba(20, 82, 74, 0.10);
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+
+  a { color: inherit; }
+
+  .container {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ============ TOP TRUST BAR ============ */
+  .top-bar {
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 12px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ============ HEADER ============ */
+  header.site-header {
+    padding: 18px 0;
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--color-primary);
+    letter-spacing: 0.3px;
+  }
+  .logo span { color: var(--color-accent); }
+  .header-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 1.5px solid var(--color-primary);
+    padding: 8px 14px;
+    border-radius: 999px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 28px 0 48px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent-dark);
+    background: #FBEADD;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4.4vw, 46px);
+    line-height: 1.12;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--color-primary);
+    border-bottom: 4px solid var(--color-accent);
+  }
+  .subheadline {
+    font-size: 17px;
+    color: var(--color-ink-soft);
+    max-width: 46ch;
+    margin-bottom: 24px;
+  }
+
+  /* Signature decorative element: a simple inline "spine curve" line,
+     nodding to orthopaedic care without using a generic stock photo. */
+  .spine-motif {
+    width: 100%;
+    max-width: 280px;
+    opacity: 0.9;
+    margin: 8px 0 4px;
+  }
+
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 28px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+  .trust-item strong {
+    color: var(--color-primary);
+    font-size: 17px;
+  }
+
+  /* ============ FORM CARD ============ */
+  .form-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-border);
+    padding: 28px;
+  }
+  .form-card h2 {
+    font-family: var(--font-display);
+    font-size: 21px;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+  }
+  .form-card .form-sub {
+    font-size: 13.5px;
+    color: var(--color-ink-soft);
+    margin-bottom: 20px;
+  }
+  .field {
+    margin-bottom: 16px;
+  }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 16px; /* 16px prevents iOS auto-zoom on focus */
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    background: #FCFBF8;
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+  }
+  .field-error {
+    display: none;
+    color: #B3261E;
+    font-size: 12.5px;
+    margin-top: 5px;
+  }
+  .field.has-error input { border-color: #B3261E; }
+  .field.has-error .field-error { display: block; }
+
+  .cta-btn {
+    width: 100%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    padding: 15px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.05s ease;
+    min-height: 50px;
+  }
+  .cta-btn:hover { background: var(--color-accent-dark); }
+  .cta-btn:active { transform: scale(0.98); }
+
+  .form-microcopy {
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    margin-top: 12px;
+  }
+
+  /* Thank-you state */
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 20px 4px;
+  }
+  .thankyou.visible { display: block; }
+  .form-card.submitted .booking-form { display: none; }
+  .thankyou-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    font-size: 28px;
+  }
+  .thankyou h2 { font-family: var(--font-display); font-size: 20px; margin-bottom: 8px; }
+  .thankyou p { font-size: 14px; color: var(--color-ink-soft); }
+
+  /* ============ TRUST / CREDENTIALS STRIP ============ */
+  .credentials-strip {
+    background: var(--color-primary);
+    padding: 26px 0;
+  }
+  .credentials-strip .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cred-item {
+    color: #fff;
+    text-align: center;
+    flex: 1;
+    min-width: 130px;
+  }
+  .cred-item .num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: #FCD9B8;
+  }
+  .cred-item .label {
+    font-size: 12.5px;
+    color: #D9E6E3;
+    margin-top: 2px;
+  }
+
+  /* ============ WHY SECTION ============ */
+  .why-section { padding: 52px 0; }
+  .why-section h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .why-section .section-sub {
+    text-align: center;
+    color: var(--color-ink-soft);
+    font-size: 15px;
+    max-width: 50ch;
+    margin: 0 auto 32px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .why-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .why-card .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .why-card h3 { font-size: 16px; margin-bottom: 6px; }
+  .why-card p { font-size: 13.5px; color: var(--color-ink-soft); }
+
+  /* ============ STICKY MOBILE CTA ============ */
+  .sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #fff;
+    border-top: 1px solid var(--color-border);
+    padding: 10px 16px;
+    z-index: 50;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.08);
+  }
+  .sticky-cta button {
+    width: 100%;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  footer {
+    padding: 24px 0 90px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--color-ink-soft);
+  }
+
+  /* ============ RESPONSIVE — mobile built deliberately, not just shrunk ============ */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .spine-motif { max-width: 200px; margin: 0 auto 8px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .header-call span.call-text { display: none; } /* icon-only call button on mobile to save space */
+    .credentials-strip .container { justify-content: center; text-align: center; }
+    .sticky-cta { display: block; }
+    footer { padding-bottom: 96px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">9 Clinics across Bengaluru · Hyderabad · Chennai — Same-week appointments available</div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="logo">Ortho<span>Now</span></div>
+    <a href="tel:+918041234567" class="header-call" id="headerCallBtn">
+      📞 <span class="call-text">Call a Clinic</span>
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Orthopaedic Specialists · Bengaluru</span>
+      <h1>Knee or back pain slowing you down? Get an <em>expert opinion</em> this week.</h1>
+      <p class="subheadline">
+        Skip the months of waiting. Our orthopaedic specialists see working professionals
+        every day for exactly this — and most consultations lead to a clear treatment plan
+        in a single visit.
+      </p>
+
+      <!-- Signature element: simple inline spine-curve motif, ties visually to the medical subject -->
+      <svg class="spine-motif" viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M5 20 Q 40 2, 75 20 T 145 20 T 215 20 T 255 20" stroke="#14524A" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="5" cy="20" r="4" fill="#E8843B"/>
+        <circle cx="75" cy="20" r="4" fill="#14524A"/>
+        <circle cx="145" cy="20" r="4" fill="#E8843B"/>
+        <circle cx="215" cy="20" r="4" fill="#14524A"/>
+        <circle cx="255" cy="20" r="4" fill="#E8843B"/>
+      </svg>
+
+      <div class="trust-row">
+        <div class="trust-item"><strong>9</strong> clinics, 3 cities</div>
+        <div class="trust-item"><strong>40,000+</strong> patients treated</div>
+        <div class="trust-item"><strong>4.7★</strong> average rating</div>
+      </div>
+    </div>
+
+    <div class="form-card" id="formCard">
+      <form class="booking-form" id="bookingForm" novalidate>
+        <h2>Book your consultation</h2>
+        <p class="form-sub">Takes 15 seconds. Our team will call you back to confirm your slot.</p>
+
+        <div class="field" id="nameField">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="e.g. Ramesh Kumar" autocomplete="name">
+          <span class="field-error">Please enter your name.</span>
+        </div>
+
+        <div class="field" id="phoneField">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" autocomplete="tel" inputmode="numeric" maxlength="10">
+          <span class="field-error">Please enter a valid 10-digit phone number.</span>
+        </div>
+
+        <button type="submit" class="cta-btn">Book My Free Consultation</button>
+        <p class="form-microcopy">No spam. We'll only call you about your appointment.</p>
+      </form>
+
+      <div class="thankyou" id="thankyouState">
+        <div class="thankyou-icon">✓</div>
+        <h2>Thanks — you're booked in!</h2>
+        <p>Our clinic coordinator will call you within the next hour to confirm your preferred slot and clinic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="credentials-strip">
+  <div class="container">
+    <div class="cred-item"><div class="num">15+ yrs</div><div class="label">Avg. specialist experience</div></div>
+    <div class="cred-item"><div class="num">9</div><div class="label">Clinic locations</div></div>
+    <div class="cred-item"><div class="num">40,000+</div><div class="label">Patients treated</div></div>
+    <div class="cred-item"><div class="num">4.7 / 5</div><div class="label">Patient rating</div></div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="container">
+    <h2>Why working professionals choose OrthoNow</h2>
+    <p class="section-sub">Built around people who can't afford weeks off work for a diagnosis.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">⏱</div>
+        <h3>Same-week appointments</h3>
+        <p>No 3-week waitlists. Most patients are seen within 2–3 working days of booking.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🩺</div>
+        <h3>Specialist-led diagnosis</h3>
+        <p>Every consultation is with a qualified orthopaedic specialist, not a general physician.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📍</div>
+        <h3>9 clinics near you</h3>
+        <p>Locations across Bengaluru mean there's likely a clinic close to your home or office.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    OrthoNow — Orthopaedic Care Network · Bengaluru · Hyderabad · Chennai
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA: keeps the conversion action reachable without scrolling back up -->
+<div class="sticky-cta" id="stickyCta">
+  <button type="button" id="stickyCtaBtn">Book My Free Consultation</button>
+</div>
+
+<script>
+  // ============================================================
+  // OrthoNow Landing Page — Form Logic
+  // No frameworks, no external requests. Vanilla JS only.
+  // ============================================================
+
+  // Ensure dataLayer exists even if GTM container hasn't loaded yet
+  window.dataLayer = window.dataLayer || [];
+
+  var form = document.getElementById('bookingForm');
+  var formCard = document.getElementById('formCard');
+  var thankyouState = document.getElementById('thankyouState');
+  var nameField = document.getElementById('nameField');
+  var phoneField = document.getElementById('phoneField');
+  var nameInput = document.getElementById('fullName');
+  var phoneInput = document.getElementById('phone');
+
+  // Only allow digits in the phone field as the user types
+  phoneInput.addEventListener('input', function () {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  function validate() {
+    var isValid = true;
+
+    if (nameInput.value.trim().length < 2) {
+      nameField.classList.add('has-error');
+      isValid = false;
+    } else {
+      nameField.classList.remove('has-error');
+    }
+
+    var phoneDigits = phoneInput.value.trim();
+    if (!/^[6-9]\d{9}$/.test(phoneDigits)) {
+      phoneField.classList.add('has-error');
+      isValid = false;
+    } else {
+      phoneField.classList.remove('has-error');
+    }
+
+    return isValid;
+  }
+
+  function handleSubmit(e) {
+    if (e) e.preventDefault();
+
+    if (!validate()) return;
+
+    // ---- THE KEY REQUIREMENT: fire dataLayer push ONLY on successful submit ----
+    window.dataLayer.push({
+      event: 'consultation_form_submitted',
+      form_name: 'orthonow_consultation_landing',
+      clinic_preference: 'not_specified', // this page doesn't collect clinic choice; kept minimal per brief
+      lead_source: 'google_ads_consultation_landing_page'
+    });
+
+    // Show thank-you state without a page reload
+    formCard.classList.add('submitted');
+    thankyouState.classList.add('visible');
+
+    // Hide sticky CTA after conversion so it doesn't nag a converted user
+    document.getElementById('stickyCta').style.display = 'none';
+  }
+
+  form.addEventListener('submit', handleSubmit);
+
+  // Sticky mobile CTA scrolls user to the form instead of duplicating it
+  document.getElementById('stickyCtaBtn').addEventListener('click', function () {
+    formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    nameInput.focus({ preventScroll: true });
+  });
+</script>
+
+</body>
+</html>
